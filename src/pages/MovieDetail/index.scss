@@ -1,0 +1,122 @@
+$sideIndent: 140px;
+$sideIndentMdScreen: $sideIndent - 70;
+$posterHeight: 444px;
+$posterHeightMdScreen: $posterHeight / 1.2;
+$videoSectionHeight: 690px;
+$videoSectionHeightMdScreen: $videoSectionHeight / 1.6;
+
+
+.movie-details-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  color: #ffffff;
+  margin-right: 100px;
+
+  .back-btn {
+    top: 150px;
+    left: $sideIndent;
+  }
+
+  .movie-details-inner-wrapper {
+    .video-section {
+      width: 100%;
+      height: $videoSectionHeight;
+      border-bottom: 1px solid lightgray;
+    }
+
+    .movie-details {
+      display: flex;
+      z-index: 100;
+      position: relative;
+      background: #202020;
+
+      .movie-description {
+        max-width: 545px;
+        h1 {
+          font-size: 48px;
+        }
+        .movie-description-speciality {
+          margin-left: 150px;
+          p {
+            font-size: 24px;
+          }
+          p:last-child {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .movie-poster {
+        position: relative;
+        margin-left: $sideIndent;
+        width: 350px;
+        img {
+          position: absolute;
+          top: -37px;
+          height: $posterHeight;
+        }
+        .rating-info {
+          margin-top: $posterHeight;
+          p {
+            margin: 0;
+          }
+          & p:first-child {
+            font-size: 48px;
+          }
+          & p:nth-child(2) {
+            font-size: 36px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .movie-details-wrapper {
+    .back-btn {
+      left: $sideIndentMdScreen;
+    }
+    .movie-details-inner-wrapper {
+      .video-section {
+        height: $videoSectionHeightMdScreen;
+      }
+      .movie-details {
+        .movie-description {
+          h1 {
+            font-size: 37px;
+          }
+          .movie-description-speciality {
+            margin-left: 50px;
+            p {
+              font-size: 20px;
+            }
+            p:last-child {
+              font-size: 16px;
+            }
+          }
+        }
+        .movie-poster {
+          width: 290px;
+          margin-left: $sideIndentMdScreen;
+          img {
+            height: $posterHeightMdScreen;
+          }
+          .rating-info {
+            margin-top: $posterHeightMdScreen;
+            & p:first-child {
+              font-size: 30px;
+            }
+            & p:nth-child(2) {
+              font-size: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

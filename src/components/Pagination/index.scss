@@ -1,0 +1,43 @@
+$arrowPrev: "../../../src/assets/images/arrow-prev.png";
+$arrowNext: "../../../src/assets/images/arrow-next.png";
+
+.pagination-wrapper {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+
+  .btn {
+    font-size: 18px;
+    color: #ffffff;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+    &[disabled] {
+      opacity: 0.5;
+    }
+  }
+
+  .prev-movie-list {
+    width: 180px;
+    &::before {
+      content: url($arrowPrev);
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 15px;
+    }
+  }
+
+  .next-movie-list {
+    &::after {
+      content: url($arrowNext);
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 15px;
+    }
+  }
+}

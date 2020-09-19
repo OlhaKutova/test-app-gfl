@@ -1,20 +1,25 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import SearchInput from "../../components/SearchInput";
 import MovieList from "../../components/MovieList";
-import { getMoviesList, getStarterMovie } from "../../redux/actionCreators";
-import Pagination from "../../components/Pagination";
+import { clearMoviesList, getMoviesList } from "../../redux/actionCreators";
+import { NextButton, PrevButton } from "../../components/arrowButtons";
+import { useQuery } from "../../utils";
+import "./index.scss";
 
 const Home = () => {
-  const { searchText, results, total, loading, starter, page } = useSelector(
+  const { location, searchText, results, total, loading, page } = useSelector(
     (state) => state.movies
   );
+  const { history, currentKey } = location;
   const dispatch = useDispatch();
-  const { loading: starterLoading, result: starterResult } = starter;
+  const query = useQuery();
+  const searchQuery = query.get("s");
 
-  useEffect(() => {
-    dispatch(getStarterMovie("Superman"));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getMoviesList("Superman", 1));
+  // }, [dispatch]);
 
   const handlePaginationChange = useCallback(
     (page) => {
@@ -23,26 +28,46 @@ const Home = () => {
     [dispatch, searchText]
   );
 
-  const renderLoader = <div>Loading...</div>;
+  useEffect(() => {
+    if (searchQuery) {
+      dispatch(getMoviesList({ searchText: searchQuery }));
+    } else {
+      dispatch(clearMoviesList());
+    }
+  }, [dispatch, searchQuery]);
 
-  const renderContent = (
-    <div>
-      <div className="hero">{JSON.stringify(starterResult, null, 2)}</div>
-      <SearchInput />
-      {results.length > 0 ? (
-        <>
-          <MovieList results={results} total={total} loading={loading} />
-          <Pagination
-            page={page}
-            total={total}
-            handlePaginationChange={handlePaginationChange}
-          />
-        </>
+  const currentPageIdx =
+    (currentKey && history.findIndex((item) => item.key === currentKey)) || 0;
+
+  return (
+    <section className="home-wrapper">
+      <div className="home-inner-wrapper">
+        <div className="poster-section" />
+        <p className="title title-year position-absolute">2020</p>
+        {currentPageIdx > 0 && (
+          <PrevButton title="Prev" className="home-prev-btn" />
+        )}
+        <div className="search-section position-absolute">
+          <h3>Explore movies & series</h3>
+          <SearchInput />
+        </div>
+        <p className="title title-name position-absolute">Superman</p>
+        {currentPageIdx < history.length - 1 && (
+          <NextButton title="Next" className="home-next-btn" />
+        )}
+      </div>
+
+      {results && results.length > 0 ? (
+        <MovieList
+          results={results}
+          total={total}
+          loading={loading}
+          page={page}
+          handlePaginationChange={handlePaginationChange}
+        />
       ) : null}
-    </div>
+    </section>
   );
-
-  return starterLoading ? renderLoader : renderContent;
 };
 
 export default Home;

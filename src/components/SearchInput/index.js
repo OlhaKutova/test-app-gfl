@@ -1,15 +1,20 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import debounce from "lodash.debounce";
-import { clearMoviesList, getMoviesList } from "../../redux/actionCreators";
+
+import { clearMoviesList } from "../../redux/actionCreators";
+
+import "./index.scss";
+import { redirect } from "../../utils";
 
 const SearchInput = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState();
   const dispatch = useDispatch();
 
   const debouncedGetMovies = useCallback(
     debounce((searchText) => {
-      dispatch(getMoviesList({ searchText }));
+      redirect(`/?s=${searchText}`);
+      setSearch("");
     }, 2000),
     [dispatch]
   );
@@ -28,9 +33,13 @@ const SearchInput = () => {
   );
 
   return (
-    <div>
-      <input type="text" value={search} onChange={handleChange} />
-    </div>
+    <input
+      type="text"
+      className="input-search"
+      placeholder="Search ..."
+      value={search}
+      onChange={handleChange}
+    />
   );
 };
 

@@ -3,6 +3,10 @@ import { useParams } from "react-router-dom";
 import { getMovieDetails } from "../../redux/actionCreators";
 import { useDispatch, useSelector } from "react-redux";
 
+import "./index.scss";
+import { PrevButton } from "../../components/arrowButtons";
+import VideoContainer from "../../components/VideoContainer";
+
 const MovieDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -16,12 +20,53 @@ const MovieDetail = () => {
 
   if (loading) return <div>Loading...</div>;
 
+  console.log("movie detail result", result);
+
+  const {
+    Title,
+    Poster,
+    imdbRating,
+    Runtime,
+    Genre,
+    Year,
+    Type,
+    Plot,
+  } = result;
+
   return (
-    <div>
-      <div>MovieDetail {id}</div>
-      <div>{result.Title}</div>
-      <div>MovieDetail {id}</div>
-    </div>
+    <section className="movie-details-wrapper">
+      <PrevButton title="Back" className="back-btn" />
+      <div className="movie-details-inner-wrapper">
+        <VideoContainer />
+        <div className="movie-details">
+          <div className="movie-poster">
+            <img src={Poster} alt="" />
+            <div className="rating-info">
+              <p>IMDB Rating:</p>
+              <p>{`${imdbRating} / 10`}</p>
+            </div>
+          </div>
+          <div className="movie-description">
+            <h1>{Title}</h1>
+            <div className="movie-description-speciality">
+              <p>
+                Runtime: <b>{Runtime}</b>
+              </p>
+              <p>
+                Genre: <b>{Genre}</b>
+              </p>
+              <p>
+                Year: <b>{Year}</b>
+              </p>
+              <p>
+                Type: <b>{Type}</b>
+              </p>
+              <p>{Plot}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

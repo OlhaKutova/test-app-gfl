@@ -1,9 +1,9 @@
 import types from "../types";
 
 const initialState = {
-  starter: {
-    loading: true,
-    result: null,
+  location: {
+    history: [],
+    currentKey: "",
   },
   movieDetails: {
     loading: true,
@@ -18,6 +18,30 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
+    case "@@router/LOCATION_CHANGE": {
+      let newHistory = [...state.location.history];
+      const { location, action, isFirstRendering } = payload;
+      if (action === "PUSH" || isFirstRendering) {
+        if (state.location.currentKey) {
+          const idx = newHistory.findIndex(
+            (item) => item.key === state.location.currentKey
+          );
+          if (idx > -1) newHistory = newHistory.slice(0, idx + 1);
+        } else {
+          newHistory = newHistory.slice(0, 1);
+        }
+        newHistory.push(location);
+      }
+      return {
+        ...state,
+        location: {
+          ...state.location,
+          history: newHistory,
+          currentKey: location.key,
+        },
+      };
+    }
+
     case types.GET_MOVIES_LIST_START:
       return {
         ...state,
@@ -40,16 +64,6 @@ export default (state = initialState, { type, payload }) => {
         total: null,
         loading: false,
         pagination: null,
-      };
-
-    case types.GET_STARTER_MOVIE_SUCCESS:
-      return {
-        ...state,
-        starter: {
-          ...state.starter,
-          loading: false,
-          result: payload,
-        },
       };
 
     case types.GET_MOVIE_DETAILS_START:

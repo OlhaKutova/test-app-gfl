@@ -1,0 +1,17 @@
+@import "~video-react/styles/scss/video-react";
+
+.video-react {
+  margin-bottom: -20%;
+}
+
+.video-react .video-react-video {
+  top: -100px;
+}
+
+.video-react .video-react-big-play-button {
+  top: 25% !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 auto;
+}
+

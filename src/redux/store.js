@@ -1,16 +1,19 @@
 import { createStore, applyMiddleware } from "redux";
 import reduxThunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { logger } from 'redux-logger';
+import { routerMiddleware } from "connected-react-router";
+import { logger } from "redux-logger";
 
+import { history } from "../routes/history";
 import rootReducer from "../redux/reducers/index";
 
-const middleware = [reduxThunk];
+const connRouterMiddleware = routerMiddleware(history);
+const middleware = [reduxThunk, connRouterMiddleware];
 
-if ( process.env.NODE_ENV === 'development' ) middleware.push(logger);
+if (process.env.NODE_ENV === "development") middleware.push(logger);
 
 const store = createStore(
-  rootReducer,
+  rootReducer(history),
   composeWithDevTools(applyMiddleware(...middleware))
 );
 

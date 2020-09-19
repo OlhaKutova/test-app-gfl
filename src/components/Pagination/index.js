@@ -1,5 +1,7 @@
 import React, { useCallback } from "react";
 
+import "./index.scss";
+
 const Pagination = ({ page, total, handlePaginationChange }) => {
   const handleChange = useCallback(
     (type) => () => {
@@ -11,19 +13,27 @@ const Pagination = ({ page, total, handlePaginationChange }) => {
     [handlePaginationChange, page]
   );
 
-  const start = (page - 1) * 10 + 1;
+  const itemsPerPage = 10;
+  const start = (page - 1) * itemsPerPage + 1;
   const isStartPage = start === 1;
-  const end = page * 10;
+  const end = page * itemsPerPage;
   const isEndPage = end >= total;
 
   return (
-    <div>
-      <button onClick={handleChange("prev")} disabled={isStartPage}>
-        Prev
+    <div className="pagination-wrapper">
+      <button
+        className="btn prev-movie-list"
+        onClick={handleChange("prev")}
+        disabled={isStartPage}
+      >
+        {start} - {isEndPage ? total : end}
       </button>
-      {start} - {isEndPage ? total : end}
-      <button onClick={handleChange("next")} disabled={isEndPage}>
-        Next
+      <button
+        className="btn next-movie-list"
+        onClick={handleChange("next")}
+        disabled={isEndPage}
+      >
+        {total}
       </button>
     </div>
   );

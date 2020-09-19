@@ -1,0 +1,97 @@
+$sideIndent: 140px;
+$sideIndentMdScreen: $sideIndent - 70;
+$posterHeight: 690px;
+$posterHeightMdScreen: $posterHeight / 1.2;
+$searchSectionTopIndent: $posterHeight - 120;
+$searchSectionTopIndentMdScreen: $posterHeightMdScreen - 90;
+$arrowPrev: "../../../src/assets/images/arrow-prev.png";
+$arrowNext: "../../../src/assets/images/arrow-next.png";
+$startPageImage: "../../assets/images/background-novie.png";
+
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-right: 100px;
+  .home-inner-wrapper {
+    position: relative;
+    padding-bottom: 150px;
+
+    .home-prev-btn, .home-next-btn {
+      top: 530px;
+    }
+
+    .title {
+      color: #ffffff;
+      font-weight: 600;
+      top: $posterHeight / 6;
+    }
+    .title-year {
+      left: $sideIndent;
+      font-size: 20px;
+    }
+
+    .title-name {
+      max-width: 500px;
+      right: $sideIndent;
+      font-size: 40px;
+      text-transform: uppercase;
+    }
+
+    .poster-section {
+      width: 100%;
+      height: $posterHeight;
+      background: url($startPageImage) no-repeat center;
+      background-size: cover;
+      text-align: center;
+    }
+    .search-section {
+      top: $searchSectionTopIndent;
+      right: 0;
+      left: $sideIndent;
+      & > h3 {
+        color: #ffffff;
+        font-size: 70px;
+        margin-bottom: 40px;
+      }
+    }
+    .position-absolute {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .home-wrapper {
+    .home-inner-wrapper {
+      .title-year {
+        left: $sideIndentMdScreen;
+      }
+      .title-name {
+        font-size: 30px;
+        max-width: 340px;
+        right: $sideIndentMdScreen;
+      }
+      .home-prev-btn, .home-next-btn {
+        top: 300px;
+      }
+      .home-prev-btn {
+        left: $sideIndentMdScreen;
+      }
+      .home-next-btn {
+        right: $sideIndentMdScreen;
+      }
+      .poster-section {
+        height: $posterHeightMdScreen;
+      }
+      .search-section {
+        top: $searchSectionTopIndentMdScreen;
+        & > h3 {
+          font-size: 55px;
+        }
+      }
+    }
+  }
+}
+
