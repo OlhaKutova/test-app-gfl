@@ -1,15 +1,3 @@
-import React from "react";
-import "./index.scss";
-
-const Spinner = () => {
-  return (
-    <div className="spinner">
-      <div />
-      <div />
-      <div />
-      <div />
-    </div>
-  );
-};
+import Spinner from "./Spinner";
 
 export default Spinner;

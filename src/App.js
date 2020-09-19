@@ -1,11 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import "./index.scss";
 
 import Home from "./pages/Home";
 import MovieDetail from "./pages/MovieDetail";
+import "./index.scss";
 
-function App() {
+const App = () => {
   return (
     <div className="app">
       <Switch>
@@ -14,6 +14,6 @@ function App() {
       </Switch>
     </div>
   );
-}
+};
 
 export default App;

@@ -47,7 +47,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         loading: true,
       };
-    case types.GET_MOVIES_LIST_SUCCESS:
+    case types.GET_MOVIES_LIST_SUCCESS: {
       const { searchText, results, total, page } = payload;
       return {
         ...state,
@@ -57,7 +57,24 @@ export default (state = initialState, { type, payload }) => {
         page,
         loading: false,
       };
-    case types.CLEAR_MOVIES_LIST:
+    }
+    case types.SCROLL_GET_MOVIES_LIST_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.SCROLL_GET_MOVIES_LIST_SUCCESS: {
+      const { searchText, results, total, page } = payload;
+      return {
+        ...state,
+        searchText,
+        results: [...state.results, ...results],
+        total,
+        page,
+        loading: false,
+      };
+    }
+    case types.CLEAR_MOVIES_LIST: {
       return {
         ...state,
         results: [],
@@ -65,8 +82,9 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
         pagination: null,
       };
+    }
 
-    case types.GET_MOVIE_DETAILS_START:
+    case types.GET_MOVIE_DETAILS_START: {
       return {
         ...state,
         movieDetails: {
@@ -75,8 +93,9 @@ export default (state = initialState, { type, payload }) => {
           result: null,
         },
       };
+    }
 
-    case types.GET_MOVIE_DETAILS_SUCCESS:
+    case types.GET_MOVIE_DETAILS_SUCCESS: {
       return {
         ...state,
         movieDetails: {
@@ -85,6 +104,7 @@ export default (state = initialState, { type, payload }) => {
           result: payload,
         },
       };
+    }
 
     default:
       return state;

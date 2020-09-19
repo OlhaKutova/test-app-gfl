@@ -1,15 +1,26 @@
 import types from "./types";
 
-const API_URL = "http://www.omdbapi.com/?apikey=4ef0253f";
+const API_URL = process.env.REACT_APP_API_URL;
 
-export const getMoviesList = ({ searchText, page = 1 }) => {
-  return async (dispatch) => {
+export const getMoviesList = ({
+  searchText,
+  page = 1,
+  isScrollType = false,
+}) => {
+  return async (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
       try {
-        if (!searchText) return resolve();
-        dispatch({
-          type: types.GET_MOVIES_LIST_START,
-        });
+        const { loading, results } = getState((state) => state.movies);
+        if ((loading && results.length > 0) || !searchText) return resolve();
+        if (!isScrollType) {
+          dispatch({
+            type: types.GET_MOVIES_LIST_START,
+          });
+        } else {
+          dispatch({
+            type: types.SCROLL_GET_MOVIES_LIST_START,
+          });
+        }
         let optionsString = `&s=${searchText.trim()}&page=${page}`;
 
         const response = await fetch(`${API_URL}${optionsString}`);
@@ -20,10 +31,17 @@ export const getMoviesList = ({ searchText, page = 1 }) => {
 
         let { Search, totalResults } = await response.json();
 
-        dispatch({
-          type: types.GET_MOVIES_LIST_SUCCESS,
-          payload: { searchText, results: Search, total: totalResults, page },
-        });
+        if (!isScrollType) {
+          dispatch({
+            type: types.GET_MOVIES_LIST_SUCCESS,
+            payload: { searchText, results: Search, total: totalResults, page },
+          });
+        } else {
+          dispatch({
+            type: types.SCROLL_GET_MOVIES_LIST_SUCCESS,
+            payload: { searchText, results: Search, total: totalResults, page },
+          });
+        }
         return resolve();
       } catch (err) {
         return reject();

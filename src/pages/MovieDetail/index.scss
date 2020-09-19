@@ -1,8 +1,9 @@
 $sideIndent: 140px;
-$sideIndentMdScreen: $sideIndent - 70;
 $posterHeight: 444px;
-$posterHeightMdScreen: $posterHeight / 1.2;
 $videoSectionHeight: 690px;
+
+$sideIndentMdScreen: $sideIndent - 70;
+$posterHeightMdScreen: $posterHeight / 1.2;
 $videoSectionHeightMdScreen: $videoSectionHeight / 1.6;
 
 
@@ -15,6 +16,7 @@ $videoSectionHeightMdScreen: $videoSectionHeight / 1.6;
   margin-right: 100px;
 
   .back-btn {
+    z-index: 1;
     top: 150px;
     left: $sideIndent;
   }

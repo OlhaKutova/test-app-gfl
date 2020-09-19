@@ -1,0 +1,106 @@
+$sideIndent: 140px;
+$posterHeight: 600px;
+$titleTopIndent: $posterHeight / 6;
+$buttonTopIndent: $posterHeight - 200;
+$searchSectionTopIndent: $posterHeight - 120;
+
+// medium screen size
+$sideIndentMdScreen: $sideIndent - 70;
+$posterHeightMdScreen: $posterHeight / 1.5;
+$buttonTopIndentMdScreen: $buttonTopIndent - 200;
+$searchSectionTopIndentMdScreen: $posterHeightMdScreen - 90;
+
+$arrowPrev: "../../../src/assets/images/arrow-prev.png";
+$arrowNext: "../../../src/assets/images/arrow-next.png";
+$startPageImage: "../../assets/images/main-poster.png";
+
+.poster-section-wrapper {
+  position: relative;
+  padding-bottom: 150px;
+
+  .home-prev-btn, .home-next-btn {
+    top: 400px;
+  }
+
+  .title {
+    color: #ffffff;
+    font-weight: 600;
+    top: $titleTopIndent;
+  }
+
+  .title-year {
+    left: $sideIndent;
+    font-size: 20px;
+  }
+
+  .title-name {
+    max-width: 500px;
+    right: $sideIndent;
+    font-size: 40px;
+    text-transform: uppercase;
+  }
+
+  .poster-section {
+    width: 100%;
+    height: $posterHeight;
+    background: url($startPageImage) no-repeat center;
+    background-size: cover;
+    text-align: center;
+  }
+
+  .search-section {
+    top: $searchSectionTopIndent;
+    right: 0;
+    left: $sideIndent;
+
+    & > h3 {
+      color: #ffffff;
+      font-size: 70px;
+      margin-bottom: 40px;
+    }
+  }
+
+  .position-absolute {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  .poster-section-wrapper {
+    .title-year {
+      left: $sideIndentMdScreen;
+    }
+
+    .title-name {
+      font-size: 30px;
+      max-width: 340px;
+      right: $sideIndentMdScreen;
+    }
+
+    .home-prev-btn, .home-next-btn {
+      top: 200px;
+    }
+
+    .home-prev-btn {
+      left: $sideIndentMdScreen;
+    }
+
+    .home-next-btn {
+      right: $sideIndentMdScreen;
+    }
+
+    .poster-section {
+      height: $posterHeightMdScreen;
+    }
+
+    .search-section {
+      top: $searchSectionTopIndentMdScreen;
+
+      & > h3 {
+        font-size: 55px;
+      }
+    }
+  }
+}
+

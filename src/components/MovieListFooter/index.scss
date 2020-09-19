@@ -1,0 +1,15 @@
+.movie-list-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 70px;
+  .footer-inner-wrapper {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .items-per-page-info {
+    p {
+      color: #ffffff;
+    }
+  }
+}

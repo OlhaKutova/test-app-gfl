@@ -3,6 +3,17 @@
   flex-direction: column;
   align-items: flex-end;
   margin-top: 50px;
+  overflow-y: scroll;
+  height: 500px;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
+  //&::-webkit-scrollbar-thumb {
+  //  background: #ececec;
+  //  border-radius: 0;
+  //}
 
   .list {
     z-index: 5;
@@ -54,7 +65,6 @@
       .hidden-image-wrapper {
         display: none;
         position: absolute;
-        //z-index: -1;
         left: -220px;
         top: 10px;
         transition: 0.3s linear;
@@ -62,17 +72,6 @@
         img {
           width: 300px;
           height: 500px;
-        }
-      }
-    }
-    .movie-list-footer {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 70px;
-
-      .items-per-page-info {
-        p {
-          color: #ffffff;
         }
       }
     }
@@ -90,14 +89,6 @@
               font-size: 30px;
             }
           }
-          //.hidden-image-wrapper {
-          //  left: -220px;
-          //  bottom: -300px;
-          //  img {
-          //    width: 300px;
-          //    height: 500px;
-          //  }
-          //}
         }
       }
     }
