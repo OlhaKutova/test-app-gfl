@@ -1,14 +1,31 @@
+// screen size > 2100px
 $sideIndent: 140px;
-$posterHeight: 600px;
-$titleTopIndent: $posterHeight / 6;
+$posterHeight: 1000px;
+$titleTopIndent: $posterHeight / 10;
 $buttonTopIndent: $posterHeight - 200;
 $searchSectionTopIndent: $posterHeight - 120;
 
-// medium screen size
-$sideIndentMdScreen: $sideIndent - 70;
-$posterHeightMdScreen: $posterHeight / 1.5;
-$buttonTopIndentMdScreen: $buttonTopIndent - 200;
-$searchSectionTopIndentMdScreen: $posterHeightMdScreen - 90;
+// screen size < 2100px
+$posterHeightLgScreen: $posterHeight / 1.5;
+$searchSectionTopIndentLgScreen: $posterHeightLgScreen - 120;
+
+// screen size < 1700px
+$posterHeightMdScreen: $posterHeightLgScreen / 1.5;
+$buttonTopIndentMdScreen: $buttonTopIndent - 500;
+$searchSectionTopIndentMdScreen: $searchSectionTopIndentLgScreen - 195;
+
+// screen size < 1030px
+$sideIndentSmScreen: $sideIndent / 3;
+$posterHeightSmScreen: $posterHeightMdScreen / 1.5;
+$buttonTopIndentSmScreen: $buttonTopIndentMdScreen - 150;
+$searchSectionTopIndentSmScreen: $searchSectionTopIndentMdScreen - 150;
+$titleTopIndentSmScreen: $titleTopIndent / 3.2;
+
+// screen size < 720px
+$searchSectionTopIndentXsScreen: 240px;
+
+// screen size < 520px
+$sideIndentXsScreen: 20px;
 
 $arrowPrev: "../../../src/assets/images/arrow-prev.png";
 $arrowNext: "../../../src/assets/images/arrow-next.png";
@@ -66,37 +83,31 @@ $startPageImage: "../../assets/images/main-poster.png";
   }
 }
 
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 2100px) {
   .poster-section-wrapper {
-    .title-year {
-      left: $sideIndentMdScreen;
+    .poster-section {
+      height: $posterHeightLgScreen;
     }
+    .search-section {
+      top: $searchSectionTopIndentLgScreen;
+    }
+  }
+}
 
+@media only screen and (max-width: 1700px) {
+  .poster-section-wrapper {
     .title-name {
       font-size: 30px;
       max-width: 340px;
-      right: $sideIndentMdScreen;
     }
-
     .home-prev-btn, .home-next-btn {
-      top: 200px;
+      top: $buttonTopIndentMdScreen;
     }
-
-    .home-prev-btn {
-      left: $sideIndentMdScreen;
-    }
-
-    .home-next-btn {
-      right: $sideIndentMdScreen;
-    }
-
     .poster-section {
       height: $posterHeightMdScreen;
     }
-
     .search-section {
       top: $searchSectionTopIndentMdScreen;
-
       & > h3 {
         font-size: 55px;
       }
@@ -104,3 +115,83 @@ $startPageImage: "../../assets/images/main-poster.png";
   }
 }
 
+@media only screen and (max-width: 1030px) {
+  .poster-section-wrapper {
+    .title-name {
+      font-size: 30px;
+      max-width: 340px;
+    }
+    .home-prev-btn, .home-next-btn {
+      top: $buttonTopIndentSmScreen;
+    }
+    .home-prev-btn {
+      left: $sideIndentSmScreen;
+    }
+    .home-next-btn {
+      right: $sideIndentSmScreen;
+    }
+    .poster-section {
+      background: url($startPageImage) no-repeat center -50;
+      height: $posterHeightSmScreen;
+    }
+
+    .title {
+      top: $titleTopIndentSmScreen;
+    }
+
+    .title-name {
+      right: $sideIndentSmScreen;
+    }
+    .title-year {
+      left: $sideIndentSmScreen;
+    }
+    .search-section {
+      top: $searchSectionTopIndentSmScreen;
+      left: $sideIndentSmScreen;
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .poster-section-wrapper {
+    .search-section {
+      top: $searchSectionTopIndentXsScreen;
+      & > h3 {
+        font-size: 35px;
+        margin-bottom: 30px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .poster-section-wrapper {
+    padding-bottom: 80px;
+    .home-prev-btn {
+      left: $sideIndentXsScreen;
+    }
+    .home-next-btn {
+      right: $sideIndentXsScreen;
+    }
+    .poster-section {
+      background: url($startPageImage) no-repeat center -70;
+    }
+    .title {
+     font-size: 22px;
+    }
+    .title-name {
+      right: $sideIndentXsScreen;
+    }
+    .title-year {
+      left: $sideIndentXsScreen;
+    }
+    .search-section {
+      top: 255px;
+      left: $sideIndentXsScreen;
+      & > h3 {
+        font-size: 25px;
+        margin-bottom: 30px;
+      }
+    }
+  }
+}

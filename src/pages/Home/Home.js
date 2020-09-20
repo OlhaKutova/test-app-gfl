@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { clearMoviesList, getMoviesList } from "../../redux/actionCreators";
@@ -14,13 +14,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const query = useQuery();
   const searchQuery = query.get("s");
-
-  const handlePaginationChange = useCallback(
-    (page, isScrollType) => {
-      if (!loading) dispatch(getMoviesList({ searchText, page, isScrollType }));
-    },
-    [dispatch, searchText, loading]
-  );
 
   useEffect(() => {
     if (searchQuery) {
@@ -39,7 +32,7 @@ const Home = () => {
           total={total}
           loading={loading}
           page={page}
-          handlePaginationChange={handlePaginationChange}
+          searchText={searchText}
         />
       ) : null}
     </section>

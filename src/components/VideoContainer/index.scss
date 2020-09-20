@@ -15,3 +15,18 @@
   margin: 0 auto;
 }
 
+@media only screen and (max-width: 960px) {
+  .video-react {
+    margin-bottom: 10%;
+  }
+  .video-react .video-react-big-play-button {
+    top: 50% !important;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .video-react .video-react-video {
+    top: 5px;
+  }
+
+}

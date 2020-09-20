@@ -13,3 +13,30 @@
     }
   }
 }
+
+@media only screen and (max-width: 1320px) {
+  .movie-list-footer {
+    .items-per-page-info {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 1030px) {
+  .movie-list-footer {
+    .footer-inner-wrapper {
+      width: 100%;
+      margin: 0 50px;
+    }
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .movie-list-footer {
+    .footer-inner-wrapper {
+      margin: 0 10px;
+    }
+  }
+}
+
+

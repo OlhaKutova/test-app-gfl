@@ -7,7 +7,7 @@ import { redirect } from "../../utils";
 import "./index.scss";
 
 const SearchInput = () => {
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
   const debouncedGetMovies = useCallback(
@@ -15,7 +15,7 @@ const SearchInput = () => {
       redirect(`/?s=${searchText}`);
       setSearch("");
     }, 2000),
-    [dispatch]
+    [dispatch, setSearch]
   );
 
   const handleChange = useCallback(
@@ -28,7 +28,7 @@ const SearchInput = () => {
         dispatch(clearMoviesList());
       }
     },
-    [debouncedGetMovies, dispatch]
+    [debouncedGetMovies, dispatch, setSearch]
   );
 
   return (

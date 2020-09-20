@@ -8,7 +8,7 @@ const Pagination = ({ page, total, handlePaginationChange }) => {
       let newPage = parseInt(page);
       if (type === "prev") newPage--;
       if (type === "next") newPage++;
-      handlePaginationChange(newPage);
+      handlePaginationChange(newPage, false);
     },
     [handlePaginationChange, page]
   );

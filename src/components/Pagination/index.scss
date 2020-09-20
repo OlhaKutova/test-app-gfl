@@ -23,7 +23,6 @@ $arrowNext: "../../../src/assets/images/arrow-next.png";
   }
 
   .prev-movie-list {
-    width: 180px;
     &::before {
       content: url($arrowPrev);
       display: inline-block;
@@ -39,5 +38,17 @@ $arrowNext: "../../../src/assets/images/arrow-next.png";
       vertical-align: middle;
       margin-left: 15px;
     }
+  }
+}
+
+@media only screen and (max-width: 1800px) {
+  .pagination-wrapper {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 1320px) {
+  .pagination-wrapper {
+    width: 100%;
   }
 }

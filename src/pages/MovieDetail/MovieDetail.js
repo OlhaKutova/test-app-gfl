@@ -6,6 +6,7 @@ import { getMovieDetails } from "../../redux/actionCreators";
 import { PrevButton } from "../../components/arrowButtons";
 import VideoContainer from "../../components/VideoContainer";
 import "./index.scss";
+import Spinner from "../../components/Spinner";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -18,7 +19,12 @@ const MovieDetail = () => {
     dispatch(getMovieDetails(id));
   }, [dispatch, id]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="movie-detail-spinner">
+        <Spinner />
+      </div>
+    );
 
   const {
     Title,

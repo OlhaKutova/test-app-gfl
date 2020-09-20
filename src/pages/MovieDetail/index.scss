@@ -22,6 +22,7 @@ $videoSectionHeightMdScreen: $videoSectionHeight / 1.6;
   }
 
   .movie-details-inner-wrapper {
+    margin-bottom: 100px;
     .video-section {
       width: 100%;
       height: $videoSectionHeight;
@@ -36,14 +37,18 @@ $videoSectionHeightMdScreen: $videoSectionHeight / 1.6;
 
       .movie-description {
         max-width: 545px;
+
         h1 {
           font-size: 48px;
         }
+
         .movie-description-speciality {
           margin-left: 150px;
+
           p {
             font-size: 24px;
           }
+
           p:last-child {
             font-size: 18px;
           }
@@ -54,19 +59,24 @@ $videoSectionHeightMdScreen: $videoSectionHeight / 1.6;
         position: relative;
         margin-left: $sideIndent;
         width: 350px;
+
         img {
           position: absolute;
           top: -37px;
           height: $posterHeight;
         }
+
         .rating-info {
           margin-top: $posterHeight;
+
           p {
             margin: 0;
           }
+
           & p:first-child {
             font-size: 48px;
           }
+
           & p:nth-child(2) {
             font-size: 36px;
             font-weight: bold;
@@ -77,47 +87,101 @@ $videoSectionHeightMdScreen: $videoSectionHeight / 1.6;
   }
 }
 
-@media only screen and (max-width: 1700px) {
+.movie-detail-spinner {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+}
+
+@media only screen and (max-width: 1800px) {
   .movie-details-wrapper {
     .back-btn {
       left: $sideIndentMdScreen;
     }
+
     .movie-details-inner-wrapper {
       .video-section {
         height: $videoSectionHeightMdScreen;
       }
+
       .movie-details {
         .movie-description {
           h1 {
             font-size: 37px;
           }
+
           .movie-description-speciality {
             margin-left: 50px;
+
             p {
               font-size: 20px;
             }
+
             p:last-child {
               font-size: 16px;
             }
           }
         }
+
         .movie-poster {
           width: 290px;
           margin-left: $sideIndentMdScreen;
+
           img {
             height: $posterHeightMdScreen;
           }
+
           .rating-info {
             margin-top: $posterHeightMdScreen;
+
             & p:first-child {
               font-size: 30px;
             }
+
             & p:nth-child(2) {
               font-size: 25px;
             }
           }
         }
       }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 970px) {
+  .movie-details-wrapper {
+    margin-right: 0;
+    .movie-details-inner-wrapper {
+      .movie-details {
+        flex-direction: column;
+        align-items: center;
+        .movie-description {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+           max-width: 100%;
+          h1 {
+            font-size: 27px;
+            margin: 40px 20px 20px;
+          }
+          .movie-description-speciality {
+            margin: 0 20px;
+            max-width: 400px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 556px) {
+  .movie-details-wrapper {
+    .back-btn {
+      left: 20px;
+      top: 30px;
     }
   }
 }

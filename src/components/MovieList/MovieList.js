@@ -1,76 +1,77 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useRef, useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { getMoviesList } from "../../redux/actionCreators";
 import MovieListFooter from "../MovieListFooter";
 import Spinner from "../Spinner";
 import "./index.scss";
 
-const MovieList = ({
-  results,
-  total,
-  page,
-  handlePaginationChange,
-  loading,
-}) => {
-  const moviesListElem = useRef(null);
-  const moviesListInnerElem = useRef(null);
+const MovieList = ({ results, total, page, loading, searchText }) => {
+  const dispatch = useDispatch();
+  const [isScrollLoading, setIsScrollLoading] = useState(false);
+  const wrapperRef = useRef(null);
+  const listRef = useRef(null);
 
-  const handleScroll = useCallback(
-    (elem, elem2) => {
-      let scrollTop = elem.current.scrollTop;
-      let scrollDiff = elem2.current.scrollHeight - scrollTop;
-
-      if (scrollDiff < 500) {
-        handlePaginationChange(parseInt(page) + 1, true);
+  const handlePaginationChange = useCallback(
+    (page, isScrollType) => {
+      if (!isScrollType) wrapperRef.current.scrollTop = 0;
+      if (!isScrollLoading) {
+        setIsScrollLoading(true);
+        dispatch(getMoviesList({ searchText, page, isScrollType })).then(() =>
+          setIsScrollLoading(false)
+        );
       }
     },
-    [page, handlePaginationChange]
+    [isScrollLoading, dispatch, searchText]
   );
+
+  const handleScroll = useCallback(() => {
+    let scrollTop = wrapperRef.current.scrollTop;
+    let scrollDiff = listRef.current.scrollHeight - scrollTop;
+
+    if (scrollDiff < 500) {
+      handlePaginationChange(parseInt(page) + 1, true);
+    }
+  }, [page, handlePaginationChange]);
 
   useEffect(() => {
     if (!loading) {
-      moviesListElem.current = document.querySelector(".movie-list-wrapper");
-      moviesListInnerElem.current = document.querySelectorAll(
-        ".movie-list-wrapper > .list"
-      )[0];
       const handler = () => {
-        handleScroll(moviesListElem, moviesListInnerElem);
+        handleScroll(wrapperRef, listRef);
       };
-      moviesListElem.current.addEventListener("scroll", handler);
+      wrapperRef.current.addEventListener("scroll", handler);
 
       return () => {
-        moviesListElem.current.removeEventListener("scroll", handler);
+        wrapperRef.current.removeEventListener("scroll", handler);
       };
     }
   }, [handleScroll, loading]);
 
   return (
     <>
-      <section className="movie-list-wrapper">
-        <ul className="list">
-          {loading ? (
-            <Spinner />
-          ) : (
-            results.map((item) => {
-              const { Title, Year, Type, Poster, imdbID } = item;
-              return (
-                <li key={imdbID} className="movie-list-item">
-                  <Link to={`/movie/${imdbID}`}>
-                    <div className="inner-wrapper">
-                      <div className="title">{Title}</div>
-                      <div className="subtitle">
-                        <p>{Year}</p>
-                        <p>{Type}</p>
-                      </div>
+      <section className="movie-list-wrapper" ref={wrapperRef}>
+        <ul className="list" ref={listRef}>
+          <div className="movie-list-loading">{loading && <Spinner />}</div>
+          {results.map((item) => {
+            const { Title, Year, Type, Poster, imdbID } = item;
+            return (
+              <li key={imdbID}>
+                <Link to={`/movie/${imdbID}`}>
+                  <div className="inner-wrapper">
+                    <div className="title">{Title}</div>
+                    <div className="subtitle">
+                      <p>{Year}</p>
+                      <p>{Type}</p>
                     </div>
-                    <div className="hidden-image-wrapper">
-                      <img src={Poster} alt="poster" />
-                    </div>
-                  </Link>
-                </li>
-              );
-            })
-          )}
+                  </div>
+                </Link>
+                <div className="hidden-image-wrapper">
+                  <img src={Poster} alt="poster" />
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </section>
       <MovieListFooter

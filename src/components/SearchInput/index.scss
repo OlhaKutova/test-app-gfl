@@ -1,6 +1,8 @@
+// screen size > 1800px
 $inputWidth: 540px;
 $searchIconPosition: $inputWidth - 40;
 
+// screen size < 1800px
 $inputWidthMdScreen: $inputWidth / 1.2;
 $inputWidthMdScreen: $inputWidthMdScreen - 40;
 $searchIconPositionMdScreen: $inputWidthMdScreen;
@@ -26,12 +28,20 @@ $searchIcon: "../../../src/assets/images/search-icon.png";
   }
 }
 
-@media only screen and (max-width: 1700px) {
+@media only screen and (max-width: 1800px) {
   .input-search {
     width: $inputWidthMdScreen;
     padding: 15px 20px;
     background-image: url($searchIcon);
     background-repeat: no-repeat;
     background-position: $searchIconPositionMdScreen;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .input-search {
+    width: 265px;
+    padding: 10px;
+    background-position: 255px;
   }
 }
