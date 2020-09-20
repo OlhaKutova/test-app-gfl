@@ -25,6 +25,6 @@ The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
 ### Runs the app in the production mode.
-Open [https://softdev.com.ua](https://softdev.com.ua) to view it in the browser.
+Open [https://apps.softdev.com.ua/movies-app/](https://apps.softdev.com.ua/movies-app/) to view it in the browser.
 
 
