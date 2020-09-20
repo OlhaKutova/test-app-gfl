@@ -65,6 +65,7 @@ export default (state = initialState, { type, payload }) => {
       };
     case types.SCROLL_GET_MOVIES_LIST_SUCCESS: {
       const { searchText, results, total, page } = payload;
+      if (!(results && results.length)) return state;
       return {
         ...state,
         searchText,
